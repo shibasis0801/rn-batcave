@@ -1,6 +1,0 @@
-module Pods_batcave_batcaveTests {
-  umbrella header "Pods-batcave-batcaveTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

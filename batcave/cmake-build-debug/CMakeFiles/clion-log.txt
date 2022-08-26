@@ -1,0 +1,24 @@
+C:\Users\shiba\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\222.3739.54\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/shiba/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/bin/ninja/win/ninja.exe -G Ninja -S C:\GitHub\rn-batcave\batcave -B C:\GitHub\rn-batcave\batcave\cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/GitHub/rn-batcave/batcave/cmake-build-debug
+
+Cannot get compiler information:
+	Compiler exited with error code 2: "C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\bin\Hostx86\x86\cl.exe" @C:\Users\shiba\AppData\Local\Temp\response-file8825115795547462359 C:\Users\shiba\AppData\Local\Temp\compiler-file1319077261870438815 | @response-file8825115795547462359=/TP /Dbatcave_EXPORTS /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -Wall -Werror -fexceptions -frtti -std:c++17 /Be /Bd /EP
+	Microsoft (R) C/C++ Optimizing Compiler Version 19.31.30818 for x86
+	Copyright (C) Microsoft Corporation.  All rights reserved.
+	
+	all:
+		@cd C:\GitHub\rn-batcave\batcave\cmake-build-debug
+		@set INCLUDE=C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\ATLMFC\include;C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\include;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um;C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt;C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\shared;C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\um;C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\winrt;C:\Program Files (x86)\Windows Kits\10\\include\10.0.22000.0\\cppwinrt
+		@set LIB=C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\ATLMFC\lib\x86;C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\lib\x86;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\lib\um\x86;C:\Program Files (x86)\Windows Kits\10\lib\10.0.22000.0\ucrt\x86;C:\Program Files (x86)\Windows Kits\10\\lib\10.0.22000.0\\um\x86
+		@set CL=
+		@set _CL_=
+		@set LINK=
+		C:\Program Files\Microsoft Visual Studio\2022\Preview\VC\Tools\MSVC\14.31.30818\bin\Hostx86\x86\cl.exe @<< C:\Users\shiba\AppData\Local\Temp\compiler-file1319077261870438815
+	/TP /Dbatcave_EXPORTS /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -Wall -Werror -fexceptions -frtti -std:c++17 /Be /Bd /EP<<
+	
+	cl /TP /Dbatcave_EXPORTS /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -Wall -Werror -fexceptions -frtti -std:c++17 /Be /Bd /EP
+	cl : Command line error D8021 : invalid numeric argument '/Werror'
+	
+	

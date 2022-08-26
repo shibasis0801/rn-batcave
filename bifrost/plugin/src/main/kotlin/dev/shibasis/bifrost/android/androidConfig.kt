@@ -1,4 +1,7 @@
 package dev.shibasis.bifrost.android
+import com.android.build.api.dsl.CompileOptions
+import com.android.build.api.dsl.ExternalNativeBuild
+import com.android.build.api.dsl.LibraryDefaultConfig
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.LibraryExtension
 import dev.shibasis.bifrost.Version
@@ -10,22 +13,48 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import java.io.File
 import java.nio.file.Paths
 
-/*
-Needs a lot of improvements
-Right now it just hides things
- */
+
 @Suppress("UnstableApiUsage")
-fun LibraryExtension.kmmAndroidApply() {
+private fun LibraryDefaultConfig.defaults(
+    cmakeLists: File? = null
+) {
+    minSdk = Version.SDK.minSdk
+    targetSdk = Version.SDK.targetSdk
+
+    if (cmakeLists != null)
+        externalNativeBuild {
+            cmake {
+                cFlags.addAll(listOf("-Wall", "-Werror", "-fexceptions", "-frtti", "-DWITH_INSPECTOR=1"))
+                arguments.add("-DCMAKE_VERBOSE_MAKEFILE=1")
+                cppFlags.add("-std=c++17")
+            }
+        }
+}
+
+@Suppress("UnstableApiUsage")
+fun CompileOptions.defaults() {
+    sourceCompatibility = dev.shibasis.bifrost.Version.SDK.Java.asEnum
+    targetCompatibility = dev.shibasis.bifrost.Version.SDK.Java.asEnum
+}
+
+fun ExternalNativeBuild.defaults(cmakeLists: File) {
+    cmake {
+        path = cmakeLists
+        // pin cmake version to support M1 machines
+        version = "3.22.1"
+    }
+}
+
+fun LibraryExtension.kmmAndroidApply(
+    cmakeLists: File? = null
+) {
     compileSdk = Version.SDK.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = Version.SDK.minSdk
-        targetSdk = Version.SDK.targetSdk
-    }
-    compileOptions {
-        sourceCompatibility = Version.SDK.Java.asEnum
-        targetCompatibility = Version.SDK.Java.asEnum
-    }
+    defaultConfig { defaults(cmakeLists) }
+    compileOptions { defaults() }
+
+    if (cmakeLists != null)
+        externalNativeBuild { defaults(cmakeLists) }
 }
 
 @Suppress("UnstableApiUsage")
@@ -69,12 +98,12 @@ fun BaseAppModuleExtension.androidApply(appID: String, useNDK: Boolean = false) 
         targetCompatibility = Version.SDK.Java.asEnum
     }
 
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Version.Compose
-    }
+//    buildFeatures {
+//        compose = true
+//    }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = Version.Compose
+//    }
 
     buildTypes {
         release {
@@ -88,37 +117,13 @@ fun BaseAppModuleExtension.androidApply(appID: String, useNDK: Boolean = false) 
 fun LibraryExtension.libraryDefaults(
     cmakeLists: File? = null
 ) {
-    val useNDK = cmakeLists != null
+
     compileSdk = Version.SDK.compileSdk
-    println("SHIBASIS $useNDK")
-    if (useNDK)
-        ndkVersion = Version.SDK.ndkVersion
-    defaultConfig {
-        minSdk = Version.SDK.minSdk
-        targetSdk = Version.SDK.targetSdk
+    ndkVersion = Version.SDK.ndkVersion
+    defaultConfig { defaults() }
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-
-        if (useNDK)
-            externalNativeBuild {
-                cmake {
-                    cFlags.addAll(listOf("-Wall", "-Werror", "-fexceptions", "-frtti", "-DWITH_INSPECTOR=1"))
-                    arguments.add("-DCMAKE_VERBOSE_MAKEFILE=1")
-                    cppFlags.add("-std=c++17")
-                }
-            }
-    }
-
-    val library = this
-    if (useNDK)
-        externalNativeBuild {
-            cmake {
-                path = cmakeLists
-                // pin cmake version to support M1 machines
-                version = "3.22.1"
-            }
-        }
+    if (cmakeLists != null)
+        externalNativeBuild { defaults(cmakeLists) }
 
 
     buildTypes {
@@ -131,10 +136,7 @@ fun LibraryExtension.libraryDefaults(
         }
     }
 
-    compileOptions {
-        sourceCompatibility = Version.SDK.Java.asEnum
-        targetCompatibility = Version.SDK.Java.asEnum
-    }
+    compileOptions { defaults() }
 }
 
 @Suppress("UnstableApiUsage")
