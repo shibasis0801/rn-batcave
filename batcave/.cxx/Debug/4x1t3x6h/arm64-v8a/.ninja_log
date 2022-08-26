@@ -1,3 +1,5 @@
 # ninja log v5
-1	1590	6832441338959555	CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o	35caad7aabfc4a9
+2	889	6832485529481554	CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o	12b7fa2fac22349
 1592	2055	6832441343653099	../../../../build/intermediates/cxx/Debug/4x1t3x6h/obj/arm64-v8a/libbatcave.so	cb00d7400aaf470c
+5	1247	6832492870705667	CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o	49948ae463878655
+3	763	6832497251221184	CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o	49948ae463878655

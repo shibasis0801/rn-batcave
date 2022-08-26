@@ -24,7 +24,7 @@ private fun LibraryDefaultConfig.defaults(
     if (cmakeLists != null)
         externalNativeBuild {
             cmake {
-                cFlags.addAll(listOf("-Wall", "-Werror", "-fexceptions", "-frtti", "-DWITH_INSPECTOR=1"))
+                cFlags.addAll(listOf("-Wall", "-Werror", "-fexceptions", "-fPIC", "-frtti", "-DWITH_INSPECTOR=1"))
                 arguments.add("-DCMAKE_VERBOSE_MAKEFILE=1")
                 cppFlags.add("-std=c++17")
             }

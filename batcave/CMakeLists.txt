@@ -6,24 +6,37 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB JNISOURCES "src/androidMain/jni/*.cpp")
+file(GLOB JNISOURCES "src/androidMain/jni/*")
 
-add_compile_options(-Wall -Werror -fexceptions -frtti)
-add_library(${PROJECT_NAME}
+add_compile_options(-Wall -Werror -fexceptions -frtti -fPIC)
+add_library(
+    batcave
     SHARED
     ${JNISOURCES}
 )
 
 include_directories(
-    cpp
+    ../tester/node_modules/react-native/React
+    ../tester/node_modules/react-native/React/Base
+    ../tester/node_modules/react-native/ReactCommon/jsi/
+    ../tester/node_modules/react-native/ReactCommon/jsi/jsi
+#    ../cpp/android
+#    ../cpp/common
 )
 
-#find_library(
-#    log-lib
-#    log
-#)
+set_target_properties(
+        batcave PROPERTIES
+        CXX_STANDARD 17
+        CXX_EXTENSIONS OFF
+        POSITION_INDEPENDENT_CODE ON
+)
+
+find_library(
+    log-lib
+    log
+)
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    batcave
     android
 )

@@ -12,8 +12,5 @@ class MainActivity: ReactActivity() {
     super.onCreate(savedInstanceState)
 
     val cppAdapter = CppAdapter()
-    Log.d("SHIBASIS", cppAdapter.stringFromJNI())
   }
-
-
 }

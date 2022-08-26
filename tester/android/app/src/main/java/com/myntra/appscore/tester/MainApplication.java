@@ -2,12 +2,16 @@ package com.myntra.appscore.tester;
 
 import android.app.Application;
 import android.content.Context;
+import androidx.annotation.Nullable;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.JSIModulePackage;
 import com.facebook.soloader.SoLoader;
+import com.myntra.appscore.batcave.TurboKotlinPackage;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
@@ -29,7 +33,14 @@ public class MainApplication extends Application implements ReactApplication {
           return packages;
         }
 
-        @Override
+          @Nullable
+          @org.jetbrains.annotations.Nullable
+          @Override
+          protected JSIModulePackage getJSIModulePackage() {
+              return new TurboKotlinPackage();
+          }
+
+          @Override
         protected String getJSMainModuleName() {
           return "index";
         }
