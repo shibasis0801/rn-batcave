@@ -9,7 +9,7 @@ fun kotlinWrapper(
     "org.jetbrains.kotlin-wrappers:kotlin-$target"
 
 
-fun KotlinDependencyHandler.basic() {
+fun KotlinDependencyHandler.webBasic() {
     implementation(kotlinWrapper("emotion"))
     implementation(kotlinWrapper("js"))
     implementation(kotlinWrapper("browser"))

@@ -1,5 +1,7 @@
-import dev.shibasis.bifrost.android.droid
-import dev.shibasis.bifrost.android.kmmAndroidApply
+import dev.shibasis.bifrost.web.*
+import dev.shibasis.bifrost.android.*
+import dev.shibasis.bifrost.common.*
+import dev.shibasis.bifrost.*
 
 plugins {
     kotlin("multiplatform")
@@ -16,11 +18,8 @@ kotlin {
     droid()
     ios() {}
     js(IR) {
-        moduleName = "database"
+        moduleName = "batcave"
         browser {
-            distribution {
-                directory = File("$projectDir/batcave")
-            }
             webpackTask {
                 outputFileName = "batcave.js"
                 output.libraryTarget = "commonjs2"
@@ -45,18 +44,18 @@ kotlin {
         }
 
         val commonMain by getting {
-            dependencies {
-
-            }
+            commonRequire()
         }
         val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+            testRequire()
         }
         val androidMain by getting {
-            dependencies {
-
+            androidRequire {
+                api(project(":core"))
+                api(project(":network"))
+                api(project(":database"))
+                api(project(":analytics"))
+                api("com.facebook.react:react-native:+")
             }
         }
         val iosMain by getting {
@@ -65,7 +64,7 @@ kotlin {
             }
         }
         val jsMain by getting {
-            dependencies {
+            webRequire {
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
             }
         }
@@ -76,20 +75,4 @@ kotlin {
 
 android {
     kmmAndroidApply()
-}
-
-dependencies {
-    var koinEnabledConfigs = listOf(
-        "kspCommonMainMetadata",
-        "kspAndroid",
-        "kspIosArm64",
-        "kspIosX64",
-        "kspJs"
-    )
-
-//    koinEnabledConfigs
-//        .forEach {
-//            println(it)
-//            add(it, "io.insert-koin:koin-ksp-compiler:1.0.1")
-//        }
 }

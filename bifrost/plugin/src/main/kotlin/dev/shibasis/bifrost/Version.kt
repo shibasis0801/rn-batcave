@@ -49,7 +49,7 @@ object Version {
     const val Coroutines = "1.6.1"
 
     // DevTools
-    const val Flipper = "0.138.0"
+    const val Flipper = "0.162.0"
     const val LeakCanary = "2.8.1"
     const val SoLoader = "0.10.1"
 

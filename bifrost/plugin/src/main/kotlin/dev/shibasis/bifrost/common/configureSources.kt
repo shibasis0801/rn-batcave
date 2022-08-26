@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 fun KotlinSourceSet.webRequire(configure: KotlinDependencyHandler.() -> Unit = {}) {
     dependencies {
-        implementation(project.dependencies.enforcedPlatform(kotlinWrapper("wrappers-bom:${Version.KotlinJSWrappers}")))
+//        implementation(project.dependencies.enforcedPlatform(kotlinWrapper("wrappers-bom:${Version.KotlinJSWrappers}")))
         configure()
     }
 }

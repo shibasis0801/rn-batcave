@@ -1,11 +1,12 @@
-import dev.shibasis.bifrost.android.droid
+import dev.shibasis.bifrost.web.*
+import dev.shibasis.bifrost.android.*
+import dev.shibasis.bifrost.common.*
+import dev.shibasis.bifrost.*
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     kotlin("native.cocoapods")
-    kotlin("plugin.serialization")
-    id("com.squareup.sqldelight")
     id("maven-publish")
     id("dev.shibasis.bifrost.plugin")
 }
@@ -15,24 +16,12 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
     droid()
-    ios() {
-        binaries.all {
-            linkerOpts("sqlite3")
-        }
-    }
-
+    ios() {}
     js(IR) {
-        moduleName = "database"
-        compilations["main"].packageJson {
-
-        }
+        moduleName = "network"
         browser {
-            distribution {
-                directory = File("$projectDir/database")
-            }
             webpackTask {
-                this.
-                outputFileName = "database.js"
+                outputFileName = "network.js"
                 output.libraryTarget = "commonjs2"
             }
         }
@@ -40,14 +29,11 @@ kotlin {
     }
 
     cocoapods {
-        summary = "Some description for the database Module"
-        homepage = "Link to the database Module homepage"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../overlord-lab/iosApp/Podfile")
+        podfile = project.file("../tester/ios/Podfile")
         framework {
-            baseName = "database"
+            baseName = "network"
         }
-
     }
 
     sourceSets {
@@ -58,71 +44,29 @@ kotlin {
         }
 
         val commonMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
-                implementation("com.squareup.sqldelight:runtime:1.5.3")
-                implementation("io.insert-koin:koin-core:3.2.0")
-            }
+            commonRequire()
         }
         val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
+            testRequire()
         }
         val androidMain by getting {
-            dependencies {
-                implementation("com.squareup.sqldelight:android-driver:1.5.3")
-                implementation("com.squareup.okhttp3:okhttp:4.10.0")
-            }
+            androidRequire()
         }
         val iosMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:1.5.3")
+
             }
         }
         val jsMain by getting {
-            dependencies {
+            webRequire {
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
-                implementation("com.squareup.sqldelight:sqljs-driver:1.5.3")
             }
         }
 
-    }
-}
-
-sqldelight {
-    database("MainDatabase") {
-        packageName = "com.myntra.appscore"
     }
 }
 
 
 android {
-    compileSdk = 31
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 21
-        targetSdk = 31
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
-dependencies {
-    var koinEnabledConfigs = listOf(
-        "kspCommonMainMetadata",
-        "kspAndroid",
-        "kspIosArm64",
-        "kspIosX64",
-        "kspJs"
-    )
-
-//    koinEnabledConfigs
-//        .forEach {
-//            println(it)
-//            add(it, "io.insert-koin:koin-ksp-compiler:1.0.1")
-//        }
+    kmmAndroidApply()
 }
