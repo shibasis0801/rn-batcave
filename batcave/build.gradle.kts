@@ -74,5 +74,5 @@ kotlin {
 
 
 android {
-    kmmAndroidApply()
+    kmmAndroidApply(file("./CMakeLists.txt"))
 }

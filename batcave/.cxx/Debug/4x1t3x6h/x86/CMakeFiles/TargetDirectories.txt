@@ -1,0 +1,3 @@
+C:/GitHub/rn-batcave/batcave/.cxx/Debug/4x1t3x6h/x86/CMakeFiles/batcave.dir
+C:/GitHub/rn-batcave/batcave/.cxx/Debug/4x1t3x6h/x86/CMakeFiles/edit_cache.dir
+C:/GitHub/rn-batcave/batcave/.cxx/Debug/4x1t3x6h/x86/CMakeFiles/rebuild_cache.dir

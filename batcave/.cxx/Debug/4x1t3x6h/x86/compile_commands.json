@@ -1,0 +1,7 @@
+[
+{
+  "directory": "C:/GitHub/rn-batcave/batcave/.cxx/Debug/4x1t3x6h/x86",
+  "command": "C:\\Users\\shiba\\AppData\\Local\\Android\\Sdk\\ndk\\21.4.7075529\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe --target=i686-none-linux-android24 --gcc-toolchain=C:/Users/shiba/AppData/Local/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/shiba/AppData/Local/Android/Sdk/ndk/21.4.7075529/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dbatcave_EXPORTS -IC:/GitHub/rn-batcave/batcave/cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O0 -fno-limit-debug-info  -fPIC -Wall -Werror -fexceptions -frtti -std=c++17 -o CMakeFiles\\batcave.dir\\src\\androidMain\\jni\\native-lib.cpp.o -c C:\\GitHub\\rn-batcave\\batcave\\src\\androidMain\\jni\\native-lib.cpp",
+  "file": "C:\\GitHub\\rn-batcave\\batcave\\src\\androidMain\\jni\\native-lib.cpp"
+}
+]

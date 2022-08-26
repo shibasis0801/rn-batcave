@@ -5,7 +5,7 @@ class CppAdapter {
 
     companion object {
         init {
-            System.loadLibrary("tester")
+            System.loadLibrary("batcave")
         }
     }
 }
