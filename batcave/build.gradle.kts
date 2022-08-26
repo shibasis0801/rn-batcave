@@ -1,40 +1,30 @@
-buildscript {
-    repositories {
-        google()
-        mavenLocal()
-        mavenCentral()
-        maven(url = "https://plugins.gradle.org/m2/")
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.2.2")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
+import dev.shibasis.bifrost.web.*
+import dev.shibasis.bifrost.android.*
+import dev.shibasis.bifrost.common.*
+import dev.shibasis.bifrost.*
+
+plugins {
+    id("dev.shibasis.bifrost.plugin")
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
+    id("maven-publish")
+}
+
+group = "com.myntra.appscore"
+version = "1.0.0"
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+android {
+    libraryDefaults()
+    kotlinOptions {
+        jvmTarget = Version.SDK.Java.asString
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenLocal()
-        maven(url = "https://www.jitpack.io")
-        maven(url = "$rootDir/../node_modules/react-native/android")
-        mavenCentral {
-            content {
-                excludeGroup("com.facebook.react")
-            }
-        }
-        gradlePluginPortal()
-        maven(url = "https://plugins.gradle.org/m2/")
-    }
-    afterEvaluate {
-        project.extensions.findByType<org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension>()?.let { ext ->
-            ext.sourceSets.removeAll { sourceSet ->
-                setOf(
-                    "androidAndroidTestRelease",
-                    "androidTestFixtures",
-                    "androidTestFixturesDebug",
-                    "androidTestFixturesRelease",
-                ).contains(sourceSet.name)
-            }
-        }
-    }
+dependencies {
+    basic()
 }

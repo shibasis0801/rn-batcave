@@ -1,0 +1,11 @@
+{
+  "name": "database",
+  "version": "1.0.0-SNAPSHOT",
+  "main": "database.js",
+  "types": "database.d.ts",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}
