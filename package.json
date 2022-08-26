@@ -1,0 +1,12 @@
+{
+  "name": "rn-batcave",
+  "version": "1.0.0",
+  "description": "Platform Framework Layer for React Native ",
+  "main": "index.js",
+  "workspaces": [
+    "batcave"
+  ],
+  "scripts": {},
+  "author": "Shibasis Patnaik",
+  "license": "ISC"
+}
