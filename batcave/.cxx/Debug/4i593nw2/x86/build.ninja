@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/GitHub/rn-batcave/batcave/.cxx/Debug/4i593nw2/arm64-v8a/
+cmake_ninja_workdir = C$:/GitHub/rn-batcave/batcave/.cxx/Debug/4i593nw2/x86/
 # =============================================================================
 # Object build statements for SHARED_LIBRARY target batcave
 
@@ -71,9 +71,9 @@ build CMakeFiles/batcave.dir/C_/GitHub/rn-batcave/tester/node_modules/react-nati
 
 
 #############################################
-# Link the shared library ..\..\..\..\build\intermediates\cxx\Debug\4i593nw2\obj\arm64-v8a\libbatcave.so
+# Link the shared library ..\..\..\..\build\intermediates\cxx\Debug\4i593nw2\obj\x86\libbatcave.so
 
-build ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcave.so: CXX_SHARED_LIBRARY_LINKER__batcave_Debug CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o CMakeFiles/batcave.dir/C_/GitHub/rn-batcave/tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp.o
+build ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/x86/libbatcave.so: CXX_SHARED_LIBRARY_LINKER__batcave_Debug CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o CMakeFiles/batcave.dir/C_/GitHub/rn-batcave/tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O0 -fno-limit-debug-info
   LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments
   LINK_LIBRARIES = -landroid  -latomic -lm
@@ -82,7 +82,7 @@ build ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcav
   PRE_LINK = cd .
   SONAME = libbatcave.so
   SONAME_FLAG = -Wl,-soname,
-  TARGET_FILE = ..\..\..\..\build\intermediates\cxx\Debug\4i593nw2\obj\arm64-v8a\libbatcave.so
+  TARGET_FILE = ..\..\..\..\build\intermediates\cxx\Debug\4i593nw2\obj\x86\libbatcave.so
   TARGET_PDB = batcave.so.dbg
 
 
@@ -90,7 +90,7 @@ build ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcav
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\arm64-v8a && C:\Users\shiba\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\x86 && C:\Users\shiba\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -101,7 +101,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\arm64-v8a && C:\Users\shiba\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SC:\GitHub\rn-batcave\batcave -BC:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\arm64-v8a"
+  COMMAND = cmd.exe /C "cd /D C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\x86 && C:\Users\shiba\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SC:\GitHub\rn-batcave\batcave -BC:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\x86"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -111,9 +111,9 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build batcave: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcave.so
+build batcave: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/x86/libbatcave.so
 
-build libbatcave.so: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcave.so
+build libbatcave.so: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/x86/libbatcave.so
 
 # =============================================================================
 # Folder targets.
@@ -121,9 +121,9 @@ build libbatcave.so: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/ob
 # =============================================================================
 
 #############################################
-# Folder: C:/GitHub/rn-batcave/batcave/.cxx/Debug/4i593nw2/arm64-v8a
+# Folder: C:/GitHub/rn-batcave/batcave/.cxx/Debug/4i593nw2/x86
 
-build all: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/arm64-v8a/libbatcave.so
+build all: phony ../../../../build/intermediates/cxx/Debug/4i593nw2/obj/x86/libbatcave.so
 
 # =============================================================================
 # Built-in targets
