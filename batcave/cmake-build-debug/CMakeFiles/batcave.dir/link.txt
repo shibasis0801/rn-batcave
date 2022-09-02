@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -g -shared -Wl,-soname,libbatcave.so -o libbatcave.so CMakeFiles/batcave.dir/src/androidMain/jni/native-lib.cpp.o  -landroid 

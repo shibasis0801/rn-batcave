@@ -1,3 +1,0 @@
-/mnt/c/GitHub/rn-batcave/batcave/cmake-build-debug/CMakeFiles/batcave.dir
-/mnt/c/GitHub/rn-batcave/batcave/cmake-build-debug/CMakeFiles/edit_cache.dir
-/mnt/c/GitHub/rn-batcave/batcave/cmake-build-debug/CMakeFiles/rebuild_cache.dir

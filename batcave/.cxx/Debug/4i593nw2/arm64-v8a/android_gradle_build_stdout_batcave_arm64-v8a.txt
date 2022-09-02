@@ -1,2 +1,0 @@
-ninja: Entering directory `C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\arm64-v8a'
-ninja: no work to do.

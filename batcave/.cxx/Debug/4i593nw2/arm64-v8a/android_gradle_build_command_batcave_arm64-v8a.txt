@@ -1,8 +1,0 @@
-Executable : C:\Users\shiba\AppData\Local\Android\Sdk\cmake\3.22.1\bin\ninja.exe
-arguments : 
--v
--C
-C:\GitHub\rn-batcave\batcave\.cxx\Debug\4i593nw2\arm64-v8a
-batcave
-jvmArgs : 
-
