@@ -12,5 +12,5 @@ class MainActivity: ReactActivity() {
     super.onCreate(savedInstanceState)
 
     val cppAdapter = CppAdapter()
-  }
+  }`
 }

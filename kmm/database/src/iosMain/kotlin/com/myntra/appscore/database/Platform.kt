@@ -21,8 +21,11 @@ actual class DriverProvider {
 }
 
 
+
+
 fun runBlockingQuery(sqlDatabase: SQLDatabase): Unit = runBlocking {
     println("PRINT SQL DATA")
+
     GlobalScope.launch {
         println("PRINT SQL DATA")
         sqlDatabase {

@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <optional>
 
 #include <jsi/jsi.h>
 
@@ -14,34 +15,68 @@ using std::vector;
 using std::make_shared;
 using std::shared_ptr;
 using std::function;
+using std::optional;
 using namespace facebook::jsi;
 
 using PlatformFunction = function<
-        Value(const vector<shared_ptr<Value>> &arguments)>;
+        optional<Value>(const vector<const Value *> &arguments)>;
+
+#define repeat(i, n) for (size_t i = 0; (i) < (n); ++(i))
+#define GUARD(ptr) if ((ptr) == nullptr) return
+#define GUARD_DEFAULT(ptr, fallback) if ((ptr) == nullptr) return fallback
+
+
+
 /*
- * Make thread safe, and handle destruction
+ * JSI is only safe to call from Main Thread, so beware.
  */
 class Bifrost {
-    Runtime &runtime;
-
 public:
-    // Make thread / destroy safe
-    Runtime& getRuntime() {
-        return runtime;
+    // Not shared_ptr because we don't want a leak. If it becomes null elsewhere, this file becomes no-op
+    Runtime *runtime;
+    // to avoid * everywhere
+    Runtime& getRuntime() const {
+        return *runtime;
     }
 
-    Bifrost(Runtime &runtime): runtime(runtime) {}
+    explicit Bifrost(Runtime *runtime): runtime(runtime) {}
+
+    struct CallableFunction {
+        Runtime *runtime;
+        Function *fn;
+        CallableFunction(Runtime *runtime, Function *fn): runtime(runtime), fn(fn) {}
+
+        template<typename... Args>
+        optional<Value> operator()(Args&& ...args) {
+            GUARD_DEFAULT(runtime, {});
+            GUARD_DEFAULT(fn, {});
+
+            return fn->call(*runtime, args...);
+        }
+    };
 
     template<typename T>
-    void setProperty(const string &name, T &&property) {
-        getRuntime().global().setProperty(getRuntime(), name.c_str(), std::forward<T>(property));
+    inline void setProperty(const string &name, T &&property) {
+        GUARD(runtime);
+        getRuntime().global()
+            .setProperty(getRuntime(), name.c_str(), std::forward<T>(property));
     }
 
-    void newFunction(
+
+    inline Value getProperty(const string &name) const {
+        return getRuntime().global()
+            .getProperty(getRuntime(), name.c_str());
+    }
+
+    using HostFunctionType1 = std::function<
+            Value(Runtime& rt, const Value* args, size_t count)>;
+
+    inline void newFunction(
             const string &name,
             int argumentCount,
             HostFunctionType &&function
     ) {
+        GUARD(runtime);
         auto jsiFunction = Function::createFromHostFunction(
                 getRuntime(),
                 PropNameID::forAscii(getRuntime(), name),
@@ -51,102 +86,119 @@ public:
         setProperty(name, std::move(jsiFunction));
     }
 
-    void newFunction(
+    // Don't recommend
+    inline void newFunction(
             const string &name,
             int argumentCount,
             PlatformFunction &&platformFunction
     ) {
+        GUARD(runtime);
         newFunction(
                 name,
                 argumentCount,
                 [=] (
-                        Runtime &runtime,
+                        Runtime &_runtime,
                         const Value &thisValue,
                         const Value *arguments,
                         size_t count
                 ) -> Value {
-                    vector<std::shared_ptr<Value>> args;
-                    for (int i = 0; i < count; ++i) {
-                        args.emplace_back(std::make_shared<Value>(runtime, arguments[i]));
+                    vector<const Value *> args(count, nullptr);
+                    repeat(i, count) {
+                        args[i] = &arguments[i];
                     }
-                    return platformFunction(args);
+
+                    auto result = platformFunction(args);
+                    if (result) {
+                        return std::move(*result);
+                    }
+                    return {};
                 });
     }
 
-    String newString(const string &cppString) {
+    inline optional<String> newString(const string &cppString) {
+        GUARD_DEFAULT(runtime, {});
         return String::createFromUtf8(getRuntime(), cppString);
     }
 
     template<typename T>
-    Value newValue(T data) {
+    inline optional<Value> newValue(const T &&data) {
+        GUARD_DEFAULT(runtime, {});
         return Value(getRuntime(), data);
     }
-};
 
-
-class BifrostValue {
-public:
-    Runtime &runtime;
-    const shared_ptr<Value> value;
-    BifrostValue(
-            Runtime &runtime,
-            Value &&value
-    ): runtime(runtime), value(make_shared<Value>(runtime, value)) {}
-
-    template<typename T>
-    static BifrostValue newValue(
-            Runtime &runtime,
-            T data
-    ) {
-        return {
-                runtime,
-                std::move(Value(runtime, data))
-        };
+    inline optional<Object> asObject(const Value &value) {
+        GUARD_DEFAULT(runtime, {});
+        if (value.isObject())
+            return value.asObject(getRuntime());
+        return {};
     }
 
-    bool isObject() { return value->isObject(); }
-    bool isFunction() { return isObject() && value->asObject(runtime).isFunction(runtime); }
 
-
-    Object asObject() {
-        if (value->isObject())
-            return value->asObject(runtime);
-        else
-            throw std::invalid_argument("Not an object");
-    }
-
-    Function asFunction() {
-        if (value->isObject())
-            return asObject().asFunction(runtime);
-        else
-            throw std::invalid_argument("Not a function");
-    }
-};
-
-class BifrostFunction: BifrostValue {
-    BifrostFunction(Runtime &runtime,Value functionObject): BifrostValue(runtime, functionObject) {
-        if (!isFunction()) {
-            throw std::invalid_argument("Not a function, can only wrap functions");
+    inline optional<Function> asFunction(const Value &value) {
+        GUARD_DEFAULT(runtime, {});
+        auto fn = asObject(value);
+        if (fn && fn->isFunction(getRuntime())) {
+            return fn->asFunction(getRuntime());
         }
+        return {};
+    }
+    inline optional<CallableFunction> asCallableFunction(const Value &value) {
+        GUARD_DEFAULT(runtime, {});
+        auto fn = asFunction(value);
+        if (fn) {
+            return CallableFunction(runtime, &*fn);
+        }
+        return {};
     }
 
-    template<typename... Args>
-    Value operator()(Args&& ...args) {
-        return asFunction().call(runtime, args...);
+    inline optional<Function> getPropertyAsFunction(const string &name) {
+        return asFunction(getProperty(name));
     }
 };
 
 
 
-void installFunctions(Runtime &runtime) {
+class TestObject: HostObject {
+    /*
+     * Create a map of functions here and call them
+     */
+
+    Value get(Runtime &runtime, const PropNameID &name) override {
+        return HostObject::get(runtime, name);
+    }
+
+    void set(Runtime &runtime, const PropNameID &name, const Value &value) override {
+        HostObject::set(runtime, name, value);
+    }
+
+    vector<PropNameID> getPropertyNames(Runtime &rt) override {
+        return HostObject::getPropertyNames(rt);
+    }
+
+    ~TestObject() override {
+
+    }
+};
+
+
+void installFunctions(Runtime *runtime) {
     Bifrost bifrost(runtime);
-    bifrost.newFunction("helloWorld", 0, std::move([&] (
-                vector<shared_ptr<Value>> &args
-            ) -> Value {
-                Value value = BifrostValue::newValue<string>(runtime, "Hello World").value.get();
-                return bifrost.newValue(
-                        bifrost.newString("Hello World")
-                );
-            }
-    ));
+    auto Promise = bifrost.getPropertyAsFunction("Promise");
+    bifrost.newFunction("helloWorld", 0,
+                        [&] (
+                                Runtime &runtime,
+                                const Value &thisValue,
+                                const Value *arguments,
+                                size_t count
+                        ) -> Value {
+                            auto str = bifrost.newString("Hello World");
+                            if (str)
+                                return {
+                                        runtime,
+                                        str.value()
+                                };
+
+                            return {};
+                        }
+    );
 }

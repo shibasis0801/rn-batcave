@@ -13,14 +13,19 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+file(GLOB BATCAVE_ANDROID "../cpp/android")
+file(GLOB BATCAVE_COMMON "../cpp/common")
 file(GLOB JNISOURCES "src/androidMain/jni/*")
 
 add_compile_options(-Wall -Werror -fexceptions -frtti -fPIC)
 add_library(
-    batcave
-    SHARED
-    ${JNISOURCES}
-    ../tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
+        batcave
+        SHARED
+        ${BATCAVE_ANDROID}
+        ${BATCAVE_COMMON}
+        ${JNISOURCES}
+        ../cpp/android/bifrost.cpp
+        ../tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
 )
 
 set_target_properties(

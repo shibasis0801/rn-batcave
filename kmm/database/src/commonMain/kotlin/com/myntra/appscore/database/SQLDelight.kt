@@ -4,6 +4,7 @@ import com.squareup.sqldelight.db.SqlDriver
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import com.myntra.appscore.MainDatabase
+import com.squareup.sqldelight.db.SqlCursor
 import kotlin.js.JsExport
 /*
 Koin Annotations didn't work.
@@ -19,8 +20,10 @@ class SQLDatabase(private val driverProvider: DriverProvider) {
     private var mainDatabase: MainDatabase? = null
 
     suspend operator fun <R> invoke(block: suspend MainDatabase.() -> R): R {
+
         if (mainDatabase == null) {
             val driver = driverProvider.get()
+            val cursor: SqlCursor
             mainDatabase = MainDatabase(driver)
         }
         return mainDatabase!!.block()
@@ -54,4 +57,9 @@ suspend fun getItems(sqlDatabase: SQLDatabase) = sqlDatabase {
     helloQueries
         .selectAll { _, full_name -> full_name }
         .executeAsList()
+}
+
+
+class SQL() {
+
 }
