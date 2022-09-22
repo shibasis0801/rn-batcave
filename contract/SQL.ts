@@ -1,3 +1,11 @@
+export interface babySQL {
+    rawQuery(query: string): string,
+    cursor: {
+        next(): string
+    }
+}
+
+/*
 export interface SQL {
     query(queryString: string): Cursor
 }
@@ -41,4 +49,5 @@ export interface Cursor {
 
     close(): void
 }
+*/
 
