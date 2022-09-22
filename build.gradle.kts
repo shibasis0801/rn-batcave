@@ -1,3 +1,7 @@
+plugins {
+    id("com.louiscad.complete-kotlin") version "1.1.0"
+}
+
 buildscript {
     val ndkVersion by extra( "25.0.8775105")
     repositories {

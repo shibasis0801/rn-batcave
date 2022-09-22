@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Platform Framework Layer for React Native ",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "newPackage": "node scripts/newPackage.js"
+  },
   "author": "Shibasis Patnaik",
   "license": "ISC"
 }

@@ -55,6 +55,21 @@ public:
         }
     };
 
+    struct Constructor {
+        Runtime *runtime;
+        Function *fn;
+
+        Constructor(Runtime *runtime, Function *fn): runtime(runtime), fn(fn) {}
+
+        template<typename... Args>
+        optional<Value> operator()(Args&& ...args) {
+            GUARD_DEFAULT(runtime, {});
+            GUARD_DEFAULT(fn, {});
+
+            return fn->template callAsConstructor(*runtime, args...);
+        }
+    };
+
     template<typename T>
     inline void setProperty(const string &name, T &&property) {
         GUARD(runtime);
@@ -84,35 +99,6 @@ public:
                 std::move(function)
         );
         setProperty(name, std::move(jsiFunction));
-    }
-
-    // Don't recommend
-    inline void newFunction(
-            const string &name,
-            int argumentCount,
-            PlatformFunction &&platformFunction
-    ) {
-        GUARD(runtime);
-        newFunction(
-                name,
-                argumentCount,
-                [=] (
-                        Runtime &_runtime,
-                        const Value &thisValue,
-                        const Value *arguments,
-                        size_t count
-                ) -> Value {
-                    vector<const Value *> args(count, nullptr);
-                    repeat(i, count) {
-                        args[i] = &arguments[i];
-                    }
-
-                    auto result = platformFunction(args);
-                    if (result) {
-                        return std::move(*result);
-                    }
-                    return {};
-                });
     }
 
     inline optional<String> newString(const string &cppString) {
@@ -151,6 +137,14 @@ public:
         return {};
     }
 
+    inline optional<Constructor> asConstructor(optional<Function> &&fn) {
+        GUARD_DEFAULT(runtime, {});
+        if (fn) {
+            return Constructor(runtime, &*fn);
+        }
+        return {};
+    }
+
     inline optional<Function> getPropertyAsFunction(const string &name) {
         return asFunction(getProperty(name));
     }
@@ -183,7 +177,12 @@ class TestObject: HostObject {
 
 void installFunctions(Runtime *runtime) {
     Bifrost bifrost(runtime);
-    auto Promise = bifrost.getPropertyAsFunction("Promise");
+    // Create a fluent API from this
+    auto Promise = bifrost.asConstructor(bifrost.getPropertyAsFunction("Promise"));
+
+    if(Promise) {
+
+    }
     bifrost.newFunction("helloWorld", 0,
                         [&] (
                                 Runtime &runtime,

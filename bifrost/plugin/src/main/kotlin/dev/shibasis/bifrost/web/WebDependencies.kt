@@ -10,6 +10,7 @@ fun kotlinWrapper(
 
 
 fun KotlinDependencyHandler.webBasic() {
+    implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:${Version.KotlinJSWrappers}"))
     implementation(kotlinWrapper("emotion"))
     implementation(kotlinWrapper("js"))
     implementation(kotlinWrapper("browser"))
