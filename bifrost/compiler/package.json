@@ -4,7 +4,7 @@
   "description": "Generate glue code for Turbo Modules from TypeScript to interface with Kotlin Multiplatform with strong typing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx ts-node index.ts"
   },
   "author": "",
   "license": "ISC",
