@@ -8,7 +8,7 @@ using namespace facebook::jsi;
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_myntra_appscore_batcave_CppAdapter_nativeInstall(JNIEnv *env, jobject thiz, jlong pointer) {
+Java_com_myntra_appscore_batcave_NativeAdapter_installTurboModules(JNIEnv *env, jobject thiz, jlong pointer) {
     auto _runtime = reinterpret_cast<Runtime *>(pointer);
 
     if (_runtime) {

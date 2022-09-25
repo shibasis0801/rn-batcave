@@ -5,7 +5,6 @@ import com.facebook.proguard.annotations.DoNotStrip
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
-import com.facebook.react.turbomodule.core.interfaces.TurboModule
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
 
@@ -18,13 +17,13 @@ class TurboKotlin(
     reactApplicationContext: ReactApplicationContext
 ): ReactContextBaseJavaModule(reactApplicationContext) {
     override fun getName() = TURBO_KOTLIN
-    private val cppAdapter = CppAdapter()
+    private val cppAdapter = NativeAdapter()
 
     override fun initialize() {
         super.initialize()
         val pointer = reactApplicationContext.javaScriptContextHolder.get()
         if (pointer != 0L)
-            cppAdapter.nativeInstall(pointer)
+            cppAdapter.installTurboModules(pointer)
     }
 }
 

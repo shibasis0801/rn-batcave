@@ -1,9 +1,8 @@
 package com.myntra.appscore.tester;
 
 import android.os.Bundle;
-import android.util.Log
 import com.facebook.react.ReactActivity;
-import com.myntra.appscore.batcave.CppAdapter
+import com.myntra.appscore.batcave.NativeAdapter
 
 class MainActivity: ReactActivity() {
 
@@ -11,6 +10,6 @@ class MainActivity: ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    val cppAdapter = CppAdapter()
-  }`
+    val cppAdapter = NativeAdapter()
+  }
 }

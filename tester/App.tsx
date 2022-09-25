@@ -15,6 +15,7 @@ import {
   Text,
   useColorScheme,
   View,
+  ToastAndroid
 } from 'react-native';
 import {Colors} from "react-native/Libraries/NewAppScreen";
 
@@ -22,6 +23,8 @@ const App = () => {
   // @ts-ignore
   const message = global.helloWorld()
   const isDarkMode = useColorScheme() === 'dark';
+  console.log("SHIBASIS", message);
+  ToastAndroid.show("SHIBASIS", 500);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
