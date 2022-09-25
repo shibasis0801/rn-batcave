@@ -11,9 +11,16 @@ const generators = {
     }
 }
 
+function Student(name: string, age: number) {
+    return {
+        name: "",
+        age: 2
+    }
+}
+
 export function compile(filePath: string) {
     const project = new Project();
-    
+
     project.addSourceFileAtPath(filePath);
     project.getSourceFiles()
         .map(parseSourceFile)

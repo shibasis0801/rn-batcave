@@ -10,7 +10,7 @@ All JSI types are primitives
 Also define Arrays and Objects of these primitives
  */
 export const types: TypeMap = {
-    "number": { // support integer vs float later
+    "Number": { // support integer vs float later
         cpp: "double",
         kotlin: "Double",
         objc: "NSNumber"

@@ -4,7 +4,8 @@
   "description": "Platform Framework Layer for React Native ",
   "main": "index.js",
   "scripts": {
-    "newPackage": "node scripts/newPackage.js"
+    "newPackage": "node scripts/newPackage.js",
+    "install": "cd tester && yarn install"
   },
   "author": "Shibasis Patnaik",
   "license": "ISC"
