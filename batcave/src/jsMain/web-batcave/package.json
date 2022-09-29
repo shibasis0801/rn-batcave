@@ -1,0 +1,8 @@
+{
+  "name": "rn-batcave-web",
+  "version": "1.0.0",
+  "description": "Allow bidirectional interop with KMM and TypeScript implementing the same contract",
+  "dependencies": {
+
+  }
+}
