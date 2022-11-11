@@ -43,7 +43,7 @@ kotlin {
         summary = "Some description for the database Module"
         homepage = "Link to the database Module homepage"
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../overlord-lab/iosApp/Podfile")
+        podfile = project.file("../tester/iosApp/Podfile")
         framework {
             baseName = "database"
         }
@@ -74,6 +74,8 @@ kotlin {
             dependencies {
                 implementation("com.squareup.sqldelight:android-driver:1.5.3")
                 implementation("com.squareup.okhttp3:okhttp:4.10.0")
+//                implementation("androidx.datastore:datastore-preferences:1.0.0")
+                // Bad API ^^^
             }
         }
         val iosMain by getting {
@@ -85,6 +87,7 @@ kotlin {
             dependencies {
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
                 implementation("com.squareup.sqldelight:sqljs-driver:1.5.3")
+//                implementation(npm("dexie", "3.2.2", true))
             }
         }
 

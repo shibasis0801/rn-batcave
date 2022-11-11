@@ -262,7 +262,7 @@ fun DependencyHandlerScope.flipper(
     leakcanary_version: String = Version.LeakCanary,
     soloader_version: String = Version.SoLoader
 ) {
-    throw Error("Refactor and correct this, until then don't use")
+//    throw Error("Refactor and correct this, until then don't use")
 
     debugImplementation("com.facebook.flipper:flipper:$flipper_version")
     debugImplementation("com.facebook.flipper:flipper-leakcanary2-plugin:$flipper_version")
