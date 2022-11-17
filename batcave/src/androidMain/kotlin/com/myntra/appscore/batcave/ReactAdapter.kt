@@ -1,6 +1,5 @@
 package com.myntra.appscore.batcave
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -14,11 +13,12 @@ import com.facebook.react.common.LifecycleState
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import com.facebook.soloader.SoLoader
 import com.myntra.appscore.core.Adapter
+import com.myntra.appscore.core.BaseActivity
 import kotlin.random.Random
 
 // Needs improvements
 class ReactAdapter(
-    activity: Activity
+    activity: BaseActivity
 ): Adapter(activity), DefaultHardwareBackBtnHandler {
 
     private val code = Random.nextInt(100, 200)
@@ -26,7 +26,7 @@ class ReactAdapter(
     var rootView: ReactRootView? = null
     var instanceManager: ReactInstanceManager? = null
 
-    fun requestPermission(activity: Activity) {
+    fun requestPermission(activity: BaseActivity) {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M) {
             if(!Settings.canDrawOverlays(activity)) {
                 val intent = Intent(
@@ -38,7 +38,7 @@ class ReactAdapter(
         }
     }
 
-    fun onPermissionResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?) {
+    fun onPermissionResult(activity: BaseActivity, requestCode: Int, resultCode: Int, data: Intent?) {
         instanceManager?.onActivityResult(activity, requestCode, resultCode, data)
     }
 
@@ -65,24 +65,24 @@ class ReactAdapter(
         requestPermission(this)
     }
 
-    override fun onResume(activity: Activity) {
+    override fun onResume(activity: BaseActivity) {
         instanceManager?.onHostResume(activity, this)
     }
 
-    override fun onStop(activity: Activity) {
+    override fun onStop(activity: BaseActivity) {
         super.onStop(activity)
     }
 
-    override fun onPause(activity: Activity) {
+    override fun onPause(activity: BaseActivity) {
         instanceManager?.onHostPause(activity)
         rootView?.unmountReactApplication()
     }
 
-    override fun onDestroy(activity: Activity) {
+    override fun onDestroy(activity: BaseActivity) {
         instanceManager?.onHostDestroy(activity)
     }
 
-    override fun onBackPressed(activity: Activity) {
+    override fun onBackPressed(activity: BaseActivity) {
         instanceManager?.onBackPressed()
     }
 
@@ -90,7 +90,7 @@ class ReactAdapter(
         invoke { onBackPressed() }
     }
 
-    override fun onKeyUp(activity: Activity, keyCode: Int, event: KeyEvent?) = run {
+    override fun onKeyUp(activity: BaseActivity, keyCode: Int, event: KeyEvent?) = run {
         if (keyCode == KeyEvent.KEYCODE_MENU && instanceManager != null) {
             instanceManager?.showDevOptionsDialog()
             true

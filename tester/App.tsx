@@ -22,6 +22,7 @@ import {Colors} from "react-native/Libraries/NewAppScreen";
 const App = () => {
   // @ts-ignore
   const message = global.LocationModule.helloWorld()
+  // const message = "not working jsi"
   const isDarkMode = useColorScheme() === 'dark';
   ToastAndroid.show("SHIBASIS" + message, 500);
 

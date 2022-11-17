@@ -117,6 +117,39 @@ struct HelloWorld: HostObject {
     }
 };
 
+using NativeFunction = function<Value(Runtime&, Value)>>;
+struct NativeObservable: HostObject {
+
+    NativeFunction getValue = [](Runtime &runtime, Value value) -> Value {
+        string message = "ShibasisPatnaik Hello";
+        jstring jmessage = toJstring(message);
+        string mirrorMessage = jni->GetStringUTFChars(jmessage, nullptr);
+        return {
+                runtime,
+                String::createFromUtf8(runtime, mirrorMessage)
+        };
+    };
+
+    NativeFunction setValue = [](Runtime &runtime)
+
+    unordered_map<string, function<Value(Runtime&, Value)>> functionMap {
+            { "getValue",  },
+            { "setValue",  }
+    };
+
+    Value get(Runtime &runtime, const PropNameID &name) override {
+        return HostObject::get(runtime, name);
+    }
+
+    void set(Runtime &runtime, const PropNameID &name, const Value &value) override {
+        HostObject::set(runtime, name, value);
+    }
+
+    vector<PropNameID> getPropertyNames(Runtime &rt) override {
+        return HostObject::getPropertyNames(rt);
+    }
+}
+
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_myntra_appscore_batcave_NativeAdapter_installTurboModules(JNIEnv *env, jobject thiz, jlong pointer) {
@@ -126,9 +159,12 @@ Java_com_myntra_appscore_batcave_NativeAdapter_installTurboModules(JNIEnv *env, 
         auto &runtime = *_runtime;
         jni = env;
 
-        auto locationPtr = make_shared<HelloWorld>();
-        auto locationModule = Object::createFromHostObject(runtime, locationPtr);
-        runtime.global().setProperty(runtime, "HelloWorld",  locationModule);
+//        auto locationPtr = make_shared<HelloWorld>();
+//        auto locationModule = Object::createFromHostObject(runtime, locationPtr);
+//        runtime.global().setProperty(runtime, "LocationModule",  locationModule);
+
+
+
     }
 }
 

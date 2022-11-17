@@ -17,7 +17,7 @@ fun KotlinDependencyHandler.webBasic() {
     implementation(kotlinWrapper("history"))
 }
 
-fun KotlinDependencyHandler.camera() {
+fun KotlinDependencyHandler.webCamera() {
     implementation(kotlinWrapper("webrtc"))
 }
 

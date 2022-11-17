@@ -4,14 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.DefaultLifecycleObserver
+import org.koin.core.context.startKoin
+import java.lang.ref.WeakReference
 
 abstract class BaseActivity: AppCompatActivity() {
     // You must initialize this
-    var adapters: List<Adapter> = listOf()
-    fun connectLifecycle(vararg adapters: Adapter) {
-        this.adapters = adapters.toList()
-        this.adapters.forEach(lifecycle::addObserver)
+    var observers: List<DefaultLifecycleObserver> = listOf()
+
+    // Run it once ? Have two instances of one adapter ?
+    val adapters: List<Adapter>
+        get() = observers.map { if (it is Adapter) it else null }.filterNotNull()
+
+    fun connectLifecycle(vararg observers: DefaultLifecycleObserver) {
+        this.observers = observers.toList()
+        this.observers.forEach(lifecycle::addObserver)
     }
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -24,8 +33,8 @@ abstract class BaseActivity: AppCompatActivity() {
     Create a KeyHandleDelegate & Interface and forward all key events there
     God observers are also not good.
     Ordering of Observers matters here,
-    first to handle and return true will prevent other adapters from running
-     */
+    first to handle and return true will prevent other observers from running
+    */
     override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
         adapters.forEach {
             val result = it.onKeyUp(this, keyCode, event)

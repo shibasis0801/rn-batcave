@@ -13,7 +13,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-file(GLOB BATCAVE_ANDROID "../cpp/android")
+#file(GLOB BATCAVE_ANDROID "../cpp/android")
 file(GLOB BATCAVE_COMMON "../cpp/common")
 file(GLOB JNISOURCES "src/androidMain/jni/*")
 
@@ -24,7 +24,7 @@ add_library(
         ${BATCAVE_ANDROID}
         ${BATCAVE_COMMON}
         ${JNISOURCES}
-        ../cpp/android/bifrost.cpp
+        #../cpp/android/bifrost.cpp
         ../tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
 )
 

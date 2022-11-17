@@ -6,14 +6,17 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import java.lang.ref.WeakReference
 
-abstract class Adapter(activity: Activity): DefaultLifecycleObserver {
-    private val ref = WeakReference(activity)
+abstract class Adapter(activity: BaseActivity): DefaultLifecycleObserver {
+    // Todo Unsafe
+    constructor(activity: Activity) : this(activity as BaseActivity)
 
-    operator fun<T> invoke(function: Activity.() -> T) = ref.get()?.run(function)
+    val ref = WeakReference(activity)
+    val activity
+        get() = ref.get()!!
 
-    fun onMainThread(insideBaseFn:  Activity.() -> Unit) = ref.get()?.apply {
-        runOnUiThread { insideBaseFn() }
-    }
+    // Todo Unsafe
+    operator fun<T> invoke(function: BaseActivity.() -> T) = ref.get()!!.run(function)
+
 
     override fun onCreate(owner: LifecycleOwner) { invoke { onCreate(this) } }
     override fun onStart(owner: LifecycleOwner) { invoke { onStart(this) } }
@@ -22,15 +25,15 @@ abstract class Adapter(activity: Activity): DefaultLifecycleObserver {
     override fun onStop(owner: LifecycleOwner) { invoke { onStop(this) } }
     override fun onDestroy(owner: LifecycleOwner) { invoke { onDestroy(this) } }
 
-    open fun onCreate(activity: Activity) {}
-    open fun onStart(activity: Activity) {}
-    open fun onResume(activity: Activity) {}
-    open fun onPause(activity: Activity) {}
-    open fun onStop(activity: Activity) {}
-    open fun onDestroy(activity: Activity) {}
+    open fun onCreate(activity: BaseActivity) {}
+    open fun onStart(activity: BaseActivity) {}
+    open fun onResume(activity: BaseActivity) {}
+    open fun onPause(activity: BaseActivity) {}
+    open fun onStop(activity: BaseActivity) {}
+    open fun onDestroy(activity: BaseActivity) {}
 
     // New Observers
-    open fun onBackPressed(activity: Activity) {}
+    open fun onBackPressed(activity: BaseActivity) {}
     // Order matters
-    open fun onKeyUp(activity: Activity, keyCode: Int, event: KeyEvent?): Boolean = false
+    open fun onKeyUp(activity: BaseActivity, keyCode: Int, event: KeyEvent?): Boolean = false
 }

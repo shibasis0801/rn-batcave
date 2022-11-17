@@ -49,10 +49,10 @@ val enableProguardInReleaseBuilds = false
  */
 //val nativeArchitectures = project.properties["reactNativeDebugArchitectures"]
 val abiCodes = mapOf(
-//    "armeabi-v7a" to 1,
-//    "x86" to 2,
+    "armeabi-v7a" to 1,
+    "x86" to 2,
     "arm64-v8a" to 3,
-//    "x86_64" to 4
+    "x86_64" to 4
 )
 
 android {
