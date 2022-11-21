@@ -45,4 +45,8 @@ find_library(
 target_link_libraries(
         batcave
         android
+        ${log-lib}
 )
+
+
+

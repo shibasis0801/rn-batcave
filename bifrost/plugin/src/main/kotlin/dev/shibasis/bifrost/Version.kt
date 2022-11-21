@@ -9,7 +9,7 @@ object Version {
         const val targetSdk = 32
         const val ndkVersion = "25.0.8775105"
 
-        const val Kotlin = "1.7.10"
+        const val Kotlin = "1.7.20"
         object Java {
             val asEnum = JavaVersion.VERSION_11
             val asString = "11"
@@ -47,6 +47,7 @@ object Version {
 
     // KMM Async
     const val Coroutines = "1.6.1"
+    const val Serialization = "1.4.1"
 
     // DevTools
     const val Flipper = "0.162.0"

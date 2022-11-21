@@ -1,7 +1,7 @@
 plugins {
     id("java-gradle-plugin")
     `kotlin-dsl`
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.7.20"
 }
 
 repositories {
@@ -15,7 +15,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.android.tools.build:gradle:7.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.20")
 }
 
 gradlePlugin {

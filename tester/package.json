@@ -6,14 +6,12 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
-
     "droidStart": "adb shell am start -n com.myntra.appscore.tester/.MainActivity",
     "droidStop": "adb shell am force-stop com.myntra.appscore.tester",
     "droidRestart": "yarn droidStop && yarn droidStart",
     "droidInstall": "adb install -r android/app/build/outputs/apk/debug/app-arm64-v8a-debug.apk",
     "droidBuild": "cd android && ./gradlew clean assembleDebug && cd ..",
     "droidRun": "yarn droidBuild && yarn droidInstall && yarn droidStart",
-
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },

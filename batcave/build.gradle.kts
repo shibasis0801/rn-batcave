@@ -9,6 +9,7 @@ plugins {
     kotlin("native.cocoapods")
     id("maven-publish")
     id("dev.shibasis.bifrost.plugin")
+    kotlin("plugin.serialization")
 }
 
 group = "com.myntra.appscore"
@@ -44,7 +45,10 @@ kotlin {
         }
 
         val commonMain by getting {
-            commonRequire()
+            commonRequire {
+                serialization()
+            }
+
         }
         val commonTest by getting {
             testRequire()

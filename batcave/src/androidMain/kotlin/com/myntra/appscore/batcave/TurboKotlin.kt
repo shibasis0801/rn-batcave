@@ -1,6 +1,8 @@
 package com.myntra.appscore.batcave
 
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.facebook.proguard.annotations.DoNotStrip
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.*
@@ -22,8 +24,16 @@ class TurboKotlin(
     override fun initialize() {
         super.initialize()
         val pointer = reactApplicationContext.javaScriptContextHolder.get()
-        if (pointer != 0L)
+        Log.d("", "SHIBASIS ADAPTER CODE")
+        Log.d("SHIBASIS", getSchemaString(Person::class))
+        val mirror = ProtobufSerializer.fromBytes<Person>(ProtobufSerializer.getBytes(dataForTransferOverJSI))
+
+        Log.d("SHIBASIS", if (mirror == dataForTransferOverJSI) "Working Protobuf" else "not equal")
+        if (pointer != 0L){
+            Log.d("", "SHIBASIS ADAPTER CODE")
             cppAdapter.installTurboModules(pointer)
+        }
+
     }
 }
 
