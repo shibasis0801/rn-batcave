@@ -209,6 +209,13 @@ struct HelloWorld: HostObject {
     }
 };
 
+/*
+
+Should I create a proxy object instead in order to intercept any call from JS ?
+
+
+ */
+
 
 extern "C"
 JNIEXPORT void JNICALL

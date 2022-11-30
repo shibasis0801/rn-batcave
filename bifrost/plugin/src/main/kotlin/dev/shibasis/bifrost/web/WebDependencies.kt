@@ -35,5 +35,5 @@ fun KotlinDependencyHandler.router() {
 fun KotlinDependencyHandler.webCoroutines(
     coroutines_version: String = Version.Coroutines
 ) {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines_version}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:${coroutines_version}")
 }

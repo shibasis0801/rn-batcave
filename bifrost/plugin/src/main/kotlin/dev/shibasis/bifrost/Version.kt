@@ -4,7 +4,7 @@ import org.gradle.api.JavaVersion
 
 object Version {
     object SDK {
-        const val minSdk = 24
+        const val minSdk = 23
         const val compileSdk = 32
         const val targetSdk = 32
         const val ndkVersion = "25.0.8775105"
@@ -46,7 +46,8 @@ object Version {
 
 
     // KMM Async
-    const val Coroutines = "1.6.1"
+//    const val Coroutines = "1.6.4-native-mt"
+    const val Coroutines = "1.6.4"
     const val Serialization = "1.4.1"
 
     // DevTools

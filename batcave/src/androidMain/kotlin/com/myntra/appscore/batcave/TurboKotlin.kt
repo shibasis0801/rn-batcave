@@ -9,7 +9,7 @@ import com.facebook.react.bridge.*
 import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
-
+import com.myntra.appscore.batcave.bridge.BridgeModule
 
 const val TURBO_KOTLIN = "TurboKotlin"
 
@@ -41,7 +41,8 @@ class TurboKotlinPackage: ReactPackage {
     override fun createNativeModules(
         reactContext: ReactApplicationContext
     ) = mutableListOf<NativeModule> (
-        TurboKotlin(reactContext)
+        TurboKotlin(reactContext),
+        BridgeModule(reactContext)
     )
 
     override fun createViewManagers(

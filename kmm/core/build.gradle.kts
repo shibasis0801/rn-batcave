@@ -47,6 +47,7 @@ kotlin {
         val commonMain by getting {
             commonRequire {
                 serialization()
+                coroutines()
             }
         }
         val commonTest by getting {
@@ -55,6 +56,7 @@ kotlin {
         val androidMain by getting {
             androidRequire {
                 basic()
+                androidCoroutines()
             }
         }
         val iosMain by getting {
@@ -65,6 +67,7 @@ kotlin {
         val jsMain by getting {
             webRequire {
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
+                webCoroutines()
             }
         }
 

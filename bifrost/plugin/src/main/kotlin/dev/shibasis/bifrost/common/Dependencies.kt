@@ -9,3 +9,8 @@ fun KotlinDependencyHandler.serialization(serializationVersion: String = Version
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$serializationVersion")
 
 }
+
+
+fun KotlinDependencyHandler.coroutines(coroutinesVersion: String = Version.Coroutines) {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+}

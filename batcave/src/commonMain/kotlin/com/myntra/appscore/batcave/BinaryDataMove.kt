@@ -41,4 +41,5 @@ val dataForTransferOverJSI = Person()
 fun getSchemaString(clazz: KClass<*>): String {
     val serializer = clazz.serializer()
     return ProtoBufSchemaGenerator.generateSchemaText(serializer.descriptor)
+    
 }

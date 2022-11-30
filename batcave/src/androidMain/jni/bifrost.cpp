@@ -24,6 +24,15 @@ using PlatformFunction = function<
 
 
 /*
+ * Add common behaviour so that we have larger things to work with
+ */
+class BifrostPlatform {
+    virtual void addFunction() {}
+    virtual void callFunction() {}
+    virtual void createObject() {}
+};
+
+/*
  * JSI is only safe to call from Main Thread, so beware.
  */
 class Bifrost {
