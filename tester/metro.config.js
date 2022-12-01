@@ -9,6 +9,7 @@ module.exports = {
   resolver: {
     blacklistRE: blacklist([
       /android\/build\/js/,
+      /android\/build\/tmp/,
     ])
   },
   transformer: {

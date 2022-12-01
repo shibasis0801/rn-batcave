@@ -22,7 +22,9 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
-
+void test(int x) {
+  
+}
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -33,7 +35,7 @@ static void InitializeFlipper(UIApplication *application) {
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
-                                                   moduleName:@"batcave"
+                                                   moduleName:@"BatTester"
                                             initialProperties:nil];
 
   if (@available(iOS 13.0, *)) {

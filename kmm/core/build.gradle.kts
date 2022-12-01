@@ -31,7 +31,7 @@ kotlin {
 
     cocoapods {
         ios.deploymentTarget = "14.1"
-        podfile = project.file("../tester/ios/Podfile")
+        podfile = project.file("../../tester/ios/Podfile")
         framework {
             baseName = "core"
         }
