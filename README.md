@@ -1,11 +1,12 @@
-ToDo
+This will be a framework abstraction layer for android/ios/web
+React Native is your View and Data Layer
+This is your Platform Layer
 
-1. Platform Name
-2. Key Value Store
-3. SQL Query / Cursor
-4. Location
-5. Camera 
-6. Permissions
+1. SQL Query / Cursor
+2. Location
+3. Camera 
+4. Permissions
+5. MutableState
 
 
 Open Issues:
@@ -13,18 +14,4 @@ Open Issues:
 2. Bidirectional interop with web (typescript)
 3. Bidirectional interop with ios (swift)
 4. Allow optional compatibility with no-op functions ( Example: adopt something first in android then web then ios  )
-
-Native Modules
-
-BifrostJSI -> Interface React with C++ using BifrostPlatform
-
-BifrostPlatform -> Interface C++ with BifrostJNI / BifrostObjC depending on Platform
-
-BifrostJNI -> Interface C++ with Android 
-BifrostObjC -> Interface C++ with ObjC
-
-Later
-BifrostWASM -> Interface C++ with Web
-BifrostTS -> 
-
 

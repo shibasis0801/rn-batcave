@@ -35,6 +35,10 @@ kotlin {
         framework {
             baseName = "batcave"
         }
+        pod("reakt") {
+            version = "1.0"
+            source = path(project.file("../reakt/reakt-darwin"))
+        }
     }
 
     sourceSets {

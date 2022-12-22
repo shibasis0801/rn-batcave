@@ -13,8 +13,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-#file(GLOB BATCAVE_ANDROID "../cpp/android")
-file(GLOB BATCAVE_COMMON "../cpp/common")
 file(GLOB JNISOURCES "src/androidMain/jni/*")
 
 add_compile_options(-Wall -Werror -fexceptions -frtti -fPIC)

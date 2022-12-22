@@ -18,6 +18,7 @@ includeBuild("bifrost")
 includeBuild("tester/android")
 
 include("batcave")
+include("reakt", "./reakt/reakt-android")
 include("core", "./kmm/core")
 include("database", "./kmm/database")
 include("network", "./kmm/network")

@@ -1,3 +1,3 @@
 import {compile} from "./src/Compiler";
 
-compile("../../contract/SQL.ts")
+compile("../../src/SQL.ts")
