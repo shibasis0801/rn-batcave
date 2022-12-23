@@ -31,7 +31,6 @@ kotlin {
                 directory = File("$projectDir/database")
             }
             webpackTask {
-                this.
                 outputFileName = "database.js"
                 output.libraryTarget = "commonjs2"
             }

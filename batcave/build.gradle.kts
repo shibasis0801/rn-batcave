@@ -2,6 +2,7 @@ import dev.shibasis.bifrost.web.*
 import dev.shibasis.bifrost.android.*
 import dev.shibasis.bifrost.common.*
 import dev.shibasis.bifrost.*
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     kotlin("multiplatform")
@@ -17,7 +18,22 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
     droid()
-    ios() {}
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    val xcf = XCFramework()
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "shared"
+            embedBitcode("disable")
+            xcf.add(this)
+        }
+    }
     js(IR) {
         moduleName = "batcave"
         browser {
@@ -66,7 +82,15 @@ kotlin {
                 api("com.facebook.react:react-native:+")
             }
         }
-        val iosMain by getting {
+        val iosX64Main by getting
+        val iosArm64Main by getting
+        val iosSimulatorArm64Main by getting
+        val iosMain by creating {
+            dependsOn(commonMain)
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+
             dependencies {
 
             }

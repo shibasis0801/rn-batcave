@@ -15,7 +15,6 @@ fun include(name: String, path: String? = null) {
 }
 
 includeBuild("bifrost")
-includeBuild("tester/android")
 
 include("batcave")
 include("reakt", "./reakt/reakt-android")
