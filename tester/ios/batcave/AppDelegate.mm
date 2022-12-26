@@ -1,6 +1,10 @@
 #import "AppDelegate.h"
-
+#import <Reakt.h>
 #import <React/RCTBridge.h>
+#import <React/RCTBridgeModule.h>
+#import <React/RCTBridge+Private.h>
+#import <React/RCTUtils.h>
+#import <jsi/jsi.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -22,9 +26,10 @@ static void InitializeFlipper(UIApplication *application) {
   [client start];
 }
 #endif
-void test(int x) {
-  
-}
+
+using namespace facebook;
+
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -62,3 +67,35 @@ void test(int x) {
 }
 
 @end
+
+@interface Batcave : NSObject <RCTBridgeModule>;
+@property (nonatomic, assign) BOOL setBridgeOnMainQueue;
+@end
+
+
+@implementation Batcave
+
+@synthesize bridge = _bridge;
+@synthesize methodQueue = _methodQueue;
+
+RCT_EXPORT_MODULE()
+
++ (BOOL)requiresMainQueueSetup {
+    return YES;
+}
+
+- (void)setBridge:(RCTBridge *)bridge {
+    _bridge = bridge;
+    _setBridgeOnMainQueue = RCTIsMainQueue();
+    [self installLibrary];
+}
+
+- (void)installLibrary {
+    RCTCxxBridge *cxxBridge = (RCTCxxBridge *)self.bridge;
+    if (cxxBridge.runtime) {
+      install((long)cxxBridge.runtime);
+    }
+}
+
+@end
+

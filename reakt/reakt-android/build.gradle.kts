@@ -21,4 +21,5 @@ android {
 
 dependencies {
     basic()
+    api("org.bytedeco:javacpp:1.5.8")
 }

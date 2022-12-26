@@ -1,5 +1,7 @@
 package com.myntra.appscore.reakt
 
+import org.bytedeco.javacpp.annotation.Namespace
+
 class NativeLib {
 
     /**
@@ -28,6 +30,7 @@ class AndroidHostObject {
 /*
 Hybrid class for state
  */
+@Namespace("Test")
 class NativeState {
 
 }
@@ -51,6 +54,7 @@ How to create a Hybrid class ?
 
 Create a KMM wrapper for these
 
+JavaCPP is 500kb before DCE
 */
 
 

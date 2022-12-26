@@ -5,7 +5,7 @@ import {
   Text,
   useColorScheme,
   View,
-  ToastAndroid
+  ToastAndroid, Platform
 } from 'react-native';
 import {Colors} from "react-native/Libraries/NewAppScreen";
 
@@ -33,19 +33,19 @@ const App = () => {
 //   const message = "not working jsi"
 
   const isDarkMode = useColorScheme() === 'dark';
-  ToastAndroid.show("SHIBASIS" + message, 500);
+   // ToastAndroid.show("SHIBASIS" + message, 500);
 
   const backgroundStyle = {
     backgroundColor: Colors.darker
   };
 
 
-  const test = useNativePromise(LegacyBridge.testQuery(""))
-  const hw = useNativePromise(LegacyBridge.helloWorld("React says Hello"))
+  const test = useNativePromise(LegacyBridge?.testQuery("") || Promise.resolve(2))
+  const hw = useNativePromise(LegacyBridge?.helloWorld("React says Hello") || Promise.resolve(2))
 
   console.log(hw);
   console.log(test);
-  console.log(LegacyBridge.testQuery);
+  console.log(LegacyBridge?.testQuery);
 
 
 
