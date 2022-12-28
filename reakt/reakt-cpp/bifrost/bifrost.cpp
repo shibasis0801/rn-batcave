@@ -5,7 +5,6 @@
 #include <optional>
 
 #include <jsi/jsi.h>
-#include "../node_modules/react-native/ReactCommon/jsi/jsi/jsi.h"
 
 using std::string;
 using std::vector;
@@ -23,10 +22,15 @@ using PlatformFunction = function<
 #define GUARD_DEFAULT(ptr, fallback) if ((ptr) == nullptr) return fallback
 
 
-class BifrostRuntime: jsi::Runtime {
-    Runtime *runtime = 0;
+class Global: public Object {
+    Global(Global&& other) = default;
+    Global& operator=(Global&& other) = default;
 
+    /// Creates a new Object instance, like '{}' in JS.
+    Global(Runtime& runtime) : Object(runtime) {}
 };
+
+
 
 
 /*
@@ -36,10 +40,9 @@ class BifrostPlatform {
     virtual void addFunction() {}
     virtual void callFunction() {}
     virtual void createObject() {}
-    void t() {
-
-    }
 };
+
+
 
 /*
  * JSI is only safe to call from Main Thread, so beware.

@@ -1,5 +1,6 @@
 package com.myntra.appscore.reakt
 
+import com.myntra.appscore.reakt.generated.NativeLibrary
 import org.bytedeco.javacpp.annotation.Namespace
 
 class NativeLib {
@@ -23,7 +24,10 @@ class NativeLib {
 JavaCPP based Hybrid Class
  */
 class AndroidHostObject {
-
+    fun test() = NativeLibrary.NativeClass().run {
+        set_property("sanu")
+        _property.string
+    }
 }
 
 

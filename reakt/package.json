@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-native": "^0.68.5"
+    "react-native": "0.68.5"
   }
 }
