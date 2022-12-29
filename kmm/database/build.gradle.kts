@@ -60,7 +60,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
-                implementation("com.squareup.sqldelight:runtime:1.5.3")
+                implementation("com.squareup.sqldelight:runtime:1.5.4")
                 implementation("io.insert-koin:koin-core:3.2.0")
             }
         }
@@ -71,7 +71,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:android-driver:1.5.3")
+                implementation("com.squareup.sqldelight:android-driver:1.5.4")
                 implementation("com.squareup.okhttp3:okhttp:4.10.0")
 //                implementation("androidx.datastore:datastore-preferences:1.0.0")
                 // Bad API ^^^
@@ -79,13 +79,13 @@ kotlin {
         }
         val iosMain by getting {
             dependencies {
-                implementation("com.squareup.sqldelight:native-driver:1.5.3")
+                implementation("com.squareup.sqldelight:native-driver:1.5.4")
             }
         }
         val jsMain by getting {
             dependencies {
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
-                implementation("com.squareup.sqldelight:sqljs-driver:1.5.3")
+                implementation("com.squareup.sqldelight:sqljs-driver:1.5.4")
 //                implementation(npm("dexie", "3.2.2", true))
             }
         }
