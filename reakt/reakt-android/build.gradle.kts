@@ -14,9 +14,7 @@ android {
     kotlinOptions {
         jvmTarget = Version.SDK.Java.asString
     }
-    libraryVariants.all {
-
-    }
+    libraryVariants.all {}
 }
 
 dependencies {
