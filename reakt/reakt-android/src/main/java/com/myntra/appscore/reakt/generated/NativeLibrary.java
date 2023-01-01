@@ -12,6 +12,7 @@ public class NativeLibrary extends com.myntra.appscore.reakt.NativeLibraryConfig
 // Parsed from NativeLibrary.h
 
 // #include <string>
+// #include <jsi/jsi.h>
     @Namespace("NativeLibrary") public static class NativeClass extends Pointer {
         static { Loader.load(); }
         /** Default native constructor. */
@@ -28,10 +29,14 @@ public class NativeLibrary extends com.myntra.appscore.reakt.NativeLibraryConfig
         @Override public NativeClass getPointer(long i) {
             return new NativeClass((Pointer)this).offsetAddress(i);
         }
-
+    
             public native @StdString BytePointer get_property();
             public native void set_property(@StdString BytePointer property);
             public native void set_property(@StdString String property);
             public native @StdString BytePointer property(); public native NativeClass property(BytePointer setter);
+            public native void test(Runtime runtime);
     }
+
+
+
 }

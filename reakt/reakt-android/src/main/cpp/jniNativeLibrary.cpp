@@ -112,9 +112,9 @@ static const char* JavaCPP_classNames[11] = {
         "java/nio/Buffer",
         "java/lang/Object",
         "java/nio/charset/Charset",
-        "com/myntra/appscore/reakt/generated/NativeLibrary$NativeClass",
-        "java/lang/RuntimeException",
         "java/lang/NullPointerException",
+        "java/lang/RuntimeException",
+        "com/myntra/appscore/reakt/generated/NativeLibrary$NativeClass",
         "org/bytedeco/javacpp/BytePointer" };
 static jclass JavaCPP_classes[11] = { NULL };
 static jfieldID JavaCPP_addressFID = NULL;
@@ -748,9 +748,9 @@ static const char* JavaCPP_members[11][3] = {
         { NULL },
         { NULL },
         { NULL },
+        { NULL },
+        { NULL },
         { "sizeof", "property" },
-        { NULL },
-        { NULL },
         { NULL } };
 static int JavaCPP_offsets[11][3] = {
         { -1 },
@@ -760,11 +760,11 @@ static int JavaCPP_offsets[11][3] = {
         { -1 },
         { -1 },
         { -1 },
+        { -1 },
+        { -1 },
         { sizeof(::NativeLibrary::NativeClass), offsetof(::NativeLibrary::NativeClass, property) },
-        { -1 },
-        { -1 },
         { -1 } };
-static int JavaCPP_memberOffsetSizes[11] = { 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1 };
+static int JavaCPP_memberOffsetSizes[11] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 };
 
 extern "C" {
 
@@ -923,6 +923,26 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM* vm, void* reserved) {
 }
 
 
+JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_test(JNIEnv* env, jobject obj, jobject arg0) {
+    ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
+        return;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jobject ptr0 = arg0;
+    jthrowable exc = NULL;
+    try {
+        ptr->test(ptr0);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 8);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
 JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_allocate(JNIEnv* env, jobject obj) {
     jthrowable exc = NULL;
     try {
@@ -940,7 +960,7 @@ JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00
 JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_property__Lorg_bytedeco_javacpp_BytePointer_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 9), "This pointer address is NULL.");
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
         return 0;
     }
     jlong position = env->GetLongField(obj, JavaCPP_positionFID);
@@ -959,7 +979,7 @@ JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary
 JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_property__(JNIEnv* env, jobject obj) {
     ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 9), "This pointer address is NULL.");
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
         return 0;
     }
     jlong position = env->GetLongField(obj, JavaCPP_positionFID);
@@ -979,56 +999,10 @@ JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary
     }
     return rarg;
 }
-JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_allocateArray(JNIEnv* env, jobject obj, jlong arg0) {
-    jthrowable exc = NULL;
-    try {
-        ::NativeLibrary::NativeClass* rptr = new ::NativeLibrary::NativeClass[arg0];
-        jlong rcapacity = arg0;
-        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_deallocateArray);
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 8);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-}
-JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_get_1property(JNIEnv* env, jobject obj) {
-    ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
-    if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 9), "This pointer address is NULL.");
-        return 0;
-    }
-    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
-    ptr += position;
-    jobject rarg = NULL;
-    signed char* rptr;
-    jthrowable exc = NULL;
-    try {
-        StringAdapter< char > radapter(ptr->get_property());
-        rptr = radapter;
-        jlong rcapacity = (jlong)radapter.size;
-        void* rowner = radapter.owner;
-        void (*deallocator)(void*) = rowner != NULL ? &StringAdapter< char >::deallocate : 0;
-        if (rptr != NULL) {
-            rarg = JavaCPP_createPointer(env, 10);
-            if (rarg != NULL) {
-                JavaCPP_initPointer(env, rarg, rptr, rcapacity, rowner, deallocator);
-            }
-        }
-    } catch (...) {
-        exc = JavaCPP_handleException(env, 8);
-    }
-
-    if (exc != NULL) {
-        env->Throw(exc);
-    }
-    return rarg;
-}
 JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_set_1property__Lorg_bytedeco_javacpp_BytePointer_2(JNIEnv* env, jobject obj, jobject arg0) {
     ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 9), "This pointer address is NULL.");
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
         return;
     }
     jlong position = env->GetLongField(obj, JavaCPP_positionFID);
@@ -1062,7 +1036,7 @@ JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00
 JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_set_1property__Ljava_lang_String_2(JNIEnv* env, jobject obj, jstring arg0) {
     ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
     if (ptr == NULL) {
-        env->ThrowNew(JavaCPP_getClass(env, 9), "This pointer address is NULL.");
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
         return;
     }
     jlong position = env->GetLongField(obj, JavaCPP_positionFID);
@@ -1079,6 +1053,52 @@ JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00
     }
 
     JavaCPP_releaseStringBytes(env, arg0, ptr0);
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+}
+JNIEXPORT jobject JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_get_1property(JNIEnv* env, jobject obj) {
+    ::NativeLibrary::NativeClass* ptr = (::NativeLibrary::NativeClass*)jlong_to_ptr(env->GetLongField(obj, JavaCPP_addressFID));
+    if (ptr == NULL) {
+        env->ThrowNew(JavaCPP_getClass(env, 7), "This pointer address is NULL.");
+        return 0;
+    }
+    jlong position = env->GetLongField(obj, JavaCPP_positionFID);
+    ptr += position;
+    jobject rarg = NULL;
+    signed char* rptr;
+    jthrowable exc = NULL;
+    try {
+        StringAdapter< char > radapter(ptr->get_property());
+        rptr = radapter;
+        jlong rcapacity = (jlong)radapter.size;
+        void* rowner = radapter.owner;
+        void (*deallocator)(void*) = rowner != NULL ? &StringAdapter< char >::deallocate : 0;
+        if (rptr != NULL) {
+            rarg = JavaCPP_createPointer(env, 10);
+            if (rarg != NULL) {
+                JavaCPP_initPointer(env, rarg, rptr, rcapacity, rowner, deallocator);
+            }
+        }
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 8);
+    }
+
+    if (exc != NULL) {
+        env->Throw(exc);
+    }
+    return rarg;
+}
+JNIEXPORT void JNICALL Java_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_allocateArray(JNIEnv* env, jobject obj, jlong arg0) {
+    jthrowable exc = NULL;
+    try {
+        ::NativeLibrary::NativeClass* rptr = new ::NativeLibrary::NativeClass[arg0];
+        jlong rcapacity = arg0;
+        JavaCPP_initPointer(env, obj, rptr, rcapacity, rptr, &JavaCPP_com_myntra_appscore_reakt_generated_NativeLibrary_00024NativeClass_deallocateArray);
+    } catch (...) {
+        exc = JavaCPP_handleException(env, 8);
+    }
+
     if (exc != NULL) {
         env->Throw(exc);
     }
