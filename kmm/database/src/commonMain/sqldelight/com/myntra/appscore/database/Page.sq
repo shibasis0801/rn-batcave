@@ -1,0 +1,16 @@
+CREATE TABLE Page (
+    pageUri TEXT PRIMARY KEY,
+    parentPageUri TEXT,
+    purgeable INTEGER,
+    lastSeen INTEGER,
+    hardTtl INTEGER,
+    softTtl INTEGER,
+    pageData TEXT
+);
+
+getAllPages:
+SELECT * FROM Page;
+
+insert:
+INSERT INTO Page (pageUri, parentPageUri, purgeable, lastSeen, hardTtl, softTtl, pageData)
+VALUES ?;

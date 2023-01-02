@@ -69,4 +69,8 @@ kotlin {
 
 android {
     kmmAndroidApply()
+    println("SHIBASIS analytics" + libraryVariants.size)
+    for (libraryVariant in libraryVariants) {
+        println("SHIBASIS analytics" + libraryVariant.name)
+    }
 }

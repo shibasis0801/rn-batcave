@@ -33,8 +33,8 @@ private fun LibraryDefaultConfig.defaults(
 
 @Suppress("UnstableApiUsage")
 fun CompileOptions.defaults() {
-    sourceCompatibility = dev.shibasis.bifrost.Version.SDK.Java.asEnum
-    targetCompatibility = dev.shibasis.bifrost.Version.SDK.Java.asEnum
+    sourceCompatibility = Version.SDK.Java.asEnum
+    targetCompatibility = Version.SDK.Java.asEnum
 }
 
 fun ExternalNativeBuild.defaults(cmakeLists: File) {
@@ -127,8 +127,11 @@ fun LibraryExtension.libraryDefaults(
 
 
     buildTypes {
-        release {
+        debug {
             isMinifyEnabled = false
+        }
+        release {
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

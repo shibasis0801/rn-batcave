@@ -1,4 +1,4 @@
-#include "jsi.h"
+#include <jsi/jsi.h>
 #include <string>
 #include <jni.h>
 #include <vector>

@@ -35,6 +35,11 @@ class BridgeModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
         "Protobuf"
     ).toReact(promise)
 
+    @ReactMethod
+    fun useToTestWorking(promise: Promise) = promise.execute { resolve, reject ->
+        resolve(1)
+    }
+
 }
 
 object Transformers {
@@ -53,3 +58,11 @@ fun<T> Iterable<T>.toReact(promise: Promise) = WritableNativeArray().apply {
         }
     }
 }.run { promise.resolve(this) }
+
+typealias Resolve = (value: Any?) -> Unit
+typealias Reject = (Throwable) -> Unit
+typealias ResolveReject = (resolve: Resolve, reject: Reject) -> Unit
+
+fun Promise.execute(resolveReject: ResolveReject) {
+    resolveReject(::resolve, ::reject);
+}

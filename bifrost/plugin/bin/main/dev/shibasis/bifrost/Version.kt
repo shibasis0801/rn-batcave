@@ -27,7 +27,7 @@ object Version {
     const val KotlinJSWrappers = "1.0.0-pre.369"
 
     // Network
-    const val SQLDelight = "1.5.3"
+    const val SQLDelight = "1.5.4"
     const val Room = "2.4.2"
     const val OkHttp = "4.9.0"
     const val WorkManager = "2.7.0"

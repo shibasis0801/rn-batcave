@@ -42,10 +42,12 @@ const App = () => {
 
   const test = useNativePromise(LegacyBridge?.testQuery("") || Promise.resolve(2))
   const hw = useNativePromise(LegacyBridge?.helloWorld("React says Hello") || Promise.resolve(2))
+  const testWorking = useNativePromise(LegacyBridge?.useToTestWorking?.() || Promise.reject("Not working"))
 
   console.log(hw);
   console.log(test);
   console.log(LegacyBridge?.testQuery);
+  console.log(testWorking);
 
 
 

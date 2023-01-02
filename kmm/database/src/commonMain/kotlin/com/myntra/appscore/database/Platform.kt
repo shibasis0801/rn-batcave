@@ -8,7 +8,3 @@ import kotlin.js.JsExport
 @Serializable
 data class Test(val name: String)
 
-expect class Platform() {
-    val platform: String
-}
-

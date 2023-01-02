@@ -1,0 +1,20 @@
+CREATE TABLE Widget (
+    id TEXT PRIMARY KEY,
+    pageUri TEXT NOT NULL,
+    hash TEXT,
+    type TEXT,
+    softTtl INTEGER,
+    data TEXT,
+    position INTEGER,
+    FOREIGN KEY (pageUri) REFERENCES Page(pageUri)
+    ON DELETE CASCADE
+);
+
+getAllWidgets:
+SELECT * FROM Widget;
+
+
+insert:
+INSERT INTO Widget (id, pageUri, hash, type, softTtl, data, position)
+VALUES ?;
+

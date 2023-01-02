@@ -15,10 +15,4 @@ fun include(name: String, path: String? = null) {
 }
 
 includeBuild("bifrost")
-
-include("batcave")
-include("reakt", "./reakt/reakt-android")
-include("core", "./kmm/core")
-include("database", "./kmm/database")
-include("network", "./kmm/network")
-include("analytics", "./kmm/analytics")
+includeBuild("tester/android")

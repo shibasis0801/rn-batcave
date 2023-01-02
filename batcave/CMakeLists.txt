@@ -38,10 +38,13 @@ find_library(
         log
 )
 
+#set(build_DIR ${CMAKE_SOURCE_DIR}/build)
+#
 #find_package(fbjni REQUIRED CONFIG)
 
 target_link_libraries(
         batcave
+#        fbjni::fbjni
         android
         ${log-lib}
 )
