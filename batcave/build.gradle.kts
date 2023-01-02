@@ -79,7 +79,7 @@ kotlin {
                 api(project(":network"))
                 api(project(":database"))
                 api(project(":analytics"))
-                api(project(":reakt-android"))
+//                api(project(":reakt-android"))
                 api("com.facebook.react:react-native:+")
             }
         }

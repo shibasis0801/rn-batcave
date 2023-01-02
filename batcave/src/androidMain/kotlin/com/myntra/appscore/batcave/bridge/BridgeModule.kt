@@ -10,8 +10,6 @@ import com.facebook.react.bridge.ReadableNativeArray
 import com.facebook.react.bridge.WritableArray
 import com.facebook.react.bridge.WritableNativeArray
 import com.facebook.react.module.annotations.ReactModule
-import com.myntra.appscore.reakt.AndroidHostObject
-import com.myntra.appscore.reakt.NativeLib
 
 const val BRIDGE_MODULE = "LegacyBridge"
 
@@ -39,7 +37,7 @@ class BridgeModule(reactContext: ReactApplicationContext): ReactContextBaseJavaM
 
     @ReactMethod
     fun useToTestWorking(promise: Promise) = promise.execute { resolve, reject ->
-        resolve(AndroidHostObject().test())
+        resolve(1)
     }
 
 }

@@ -4,10 +4,10 @@ cmake_minimum_required(VERSION 3.22.1)
 project("reakt")
 
 include_directories(
-        ../node_modules/react-native/React
-        ../node_modules/react-native/React/Base
-        ../node_modules/react-native/ReactCommon/jsi
-        ../node_modules/react-native/ReactCommon/jsi/jsi
+        ../../tester/node_modules/react-native/React
+        ../../tester/node_modules/react-native/React/Base
+        ../../tester/node_modules/react-native/ReactCommon/jsi
+        ../../tester/node_modules/react-native/ReactCommon/jsi/jsi
 )
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -18,7 +18,7 @@ add_compile_options(-Wall -Werror -fexceptions -frtti -fPIC)
 # Should not use GLOB for speed
 file(GLOB REAKT_CPP "../reakt-cpp/**/*")
 file(GLOB REAKT "src/main/cpp/**/*")
-file(GLOB REACT "../node_modules/react-native/ReactCommon/jsi/**/*")
+file(GLOB REACT "../../tester/node_modules/react-native/ReactCommon/jsi/**/*")
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -39,7 +39,9 @@ add_library( # Sets the name of the library.
 
         ${REACT}
         ${REAKT}
-)
+        ../../tester/node_modules/react-native/ReactCommon/jsi/jsi/jsi.cpp
+
+        )
 
 set_target_properties(
         reakt PROPERTIES
