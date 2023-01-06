@@ -46,7 +46,6 @@ object Version {
 
 
     // KMM Async
-//    const val Coroutines = "1.6.4-native-mt"
     const val Coroutines = "1.6.4"
     const val Serialization = "1.4.1"
 

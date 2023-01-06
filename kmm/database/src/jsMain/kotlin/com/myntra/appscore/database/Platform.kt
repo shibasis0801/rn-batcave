@@ -1,39 +1,39 @@
 package com.myntra.appscore.database
 
-import Dexie
-import com.myntra.appscore.MainDatabase
-import com.myntra.appscore.database.keyvalue.KeyValueStore
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.sqljs.initSqlDriver
-import kotlinx.browser.window
-import kotlinx.coroutines.await
+import com.juul.indexeddb.Database
+import com.juul.indexeddb.openDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.promise
+import kotlin.js.Promise
+
+abstract class WebLayoutEngineQueries(private val db: WebDatabase): ILayoutEngineQueries {}
+
+@JsExport
+class WebDatabase(val name: String) {
+//    private val dexie = createDexie(name)
+//
+//    val pageTable = dexie.table<Page, Int>("Page")
+//    val widgetTable = dexie.table<Widget, Int>("Widget")
 
 
-actual class DriverProvider {
-    actual suspend fun get(): SqlDriver = initSqlDriver(MainDatabase.Schema).await()
-}
 
-private fun createDexie(name: String): Dexie = js("new Dexie(name)").unsafeCast<Dexie>()
+    fun test(): Promise<String> {
+        return GlobalScope.promise {
+            val db = openDatabase(name, 1) { database, _, _ ->
+                val pageTable = database.createObjectStore("Page")
+//                val widgetTable = database.createObjectStore("Widget")
+            }
 
-data class LEResponse(
-    val id: Int,
-    val content: String
-)
+            db.writeTransaction("Page") {
+                val pageTable = objectStore("Page")
+                pageTable.add("sanu")
+            }
 
-class Dexie(override val name: String): KeyValueStore {
-    private val dexie = createDexie(name)
-    private val leResponse = dexie.table<LEResponse, Int>("leResponse")
+            db.transaction("Page") {
+                val pageTable = objectStore("Page")
+                pageTable.getAll()[0].toString()
+            }
+        }
 
-    override fun <T> get(key: String): T {
-        leResponse
-            .toArray()
-            .then({
-                  it.forEach { println(it) }
-            }, null)
-        return 5 as T
-    }
-
-    override fun <T> set(key: String, value: T): Boolean {
-        return true
     }
 }

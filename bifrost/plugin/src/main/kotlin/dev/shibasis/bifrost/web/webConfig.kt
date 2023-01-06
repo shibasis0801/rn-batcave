@@ -12,7 +12,6 @@ fun KotlinMultiplatformExtension.web(configure: KotlinJsTargetDsl.() -> Unit = {
                 showProgress = true
                 export = true
                 progressReporter = true
-                cssSupport.enabled = true
             }
 
             webpackTask {
@@ -20,7 +19,7 @@ fun KotlinMultiplatformExtension.web(configure: KotlinJsTargetDsl.() -> Unit = {
                 sourceMaps = true //not supported in IR yet
             }
         }
-        binaries.executable()
+        binaries.library()
 
         configure()
     }

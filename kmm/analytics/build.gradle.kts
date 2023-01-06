@@ -25,7 +25,7 @@ kotlin {
                 output.libraryTarget = "commonjs2"
             }
         }
-        binaries.executable()
+        binaries.library()
     }
 
     cocoapods {

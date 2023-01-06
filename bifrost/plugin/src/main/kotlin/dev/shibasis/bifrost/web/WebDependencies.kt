@@ -11,24 +11,20 @@ fun kotlinWrapper(
 
 fun KotlinDependencyHandler.webBasic() {
     implementation(project.dependencies.enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:${Version.KotlinJSWrappers}"))
-    implementation(kotlinWrapper("emotion"))
     implementation(kotlinWrapper("js"))
     implementation(kotlinWrapper("browser"))
     implementation(kotlinWrapper("history"))
+    implementation(kotlinWrapper("typescript"))
 }
 
 fun KotlinDependencyHandler.webCamera() {
     implementation(kotlinWrapper("webrtc"))
 }
 
-fun KotlinDependencyHandler.react(
-    kotlinWrappersVersion: String = Version.KotlinJSWrappers
-) {
+fun KotlinDependencyHandler.react() {
+    implementation(kotlinWrapper("emotion"))
     implementation(kotlinWrapper("react"))
     implementation(kotlinWrapper("react-dom"))
-}
-
-fun KotlinDependencyHandler.router() {
     implementation(kotlinWrapper("react-router-dom"))
 }
 

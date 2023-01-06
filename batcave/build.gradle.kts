@@ -42,7 +42,7 @@ kotlin {
                 output.libraryTarget = "commonjs2"
             }
         }
-        binaries.executable()
+        binaries.library()
     }
 
     cocoapods {
@@ -66,7 +66,7 @@ kotlin {
 
         val commonMain by getting {
             commonRequire {
-                serialization()
+                serialization(Version.Serialization, true)
             }
 
         }

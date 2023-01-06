@@ -1,5 +1,7 @@
-import dev.shibasis.bifrost.android.droid
-import dev.shibasis.bifrost.android.libraryDefaults
+import dev.shibasis.bifrost.android.*
+import dev.shibasis.bifrost.web.*
+import dev.shibasis.bifrost.common.*
+
 
 plugins {
     kotlin("multiplatform")
@@ -9,6 +11,7 @@ plugins {
     id("com.squareup.sqldelight")
     id("maven-publish")
     id("dev.shibasis.bifrost.plugin")
+    id("dev.petuska.npm.publish") version "3.2.0"
 }
 
 group = "com.myntra.appscore"
@@ -36,7 +39,7 @@ kotlin {
                 output.libraryTarget = "commonjs2"
             }
         }
-        binaries.executable()
+        binaries.library()
     }
 
     cocoapods {
@@ -54,15 +57,15 @@ kotlin {
         all {
             languageSettings.apply {
                 optIn("kotlin.js.ExperimentalJsExport")
+                optIn("DelicateCoroutinesApi")
             }
         }
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
+                serialization()
+                coroutines()
                 implementation("com.squareup.sqldelight:runtime:1.5.4")
-                implementation("io.insert-koin:koin-core:3.2.0")
             }
         }
         val commonTest by getting {
@@ -85,9 +88,12 @@ kotlin {
         }
         val jsMain by getting {
             dependencies {
+                webBasic()
+                webCoroutines()
+                implementation("com.juul.indexeddb:core:0.5.0")
+                implementation("com.squareup.sqldelight:sqljs-driver:1.5.4") // Dropped in DCE, only present for compilation without another sourceset
                 implementation(devNpm("copy-webpack-plugin", "11.0.0"))
-                implementation("com.squareup.sqldelight:sqljs-driver:1.5.4")
-//                implementation(npm("dexie", "3.2.2", true))
+//                implementation(npm("idb", "7.1.1"))
             }
         }
 

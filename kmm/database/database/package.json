@@ -3,7 +3,10 @@
   "version": "1.0.0-SNAPSHOT",
   "main": "database.js",
   "types": "database.d.ts",
-  "devDependencies": {},
+  "devDependencies": {
+    "copy-webpack-plugin": "11.0.0",
+    "dukat": "0.5.8-rc.4"
+  },
   "dependencies": {},
   "peerDependencies": {},
   "optionalDependencies": {},
